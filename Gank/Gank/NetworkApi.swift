@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 protocol NetworkApi {
   var requset: NSURLRequest { get set }
@@ -29,7 +30,8 @@ extension NetworkApi {
       data, response, error in
       guard let data = data else { return }
       NSOperationQueue.mainQueue().addOperationWithBlock({
-        if let result = self.formatter.formatData(data) {
+        let json = JSON(data: data)
+        if let result = self.formatter.formatData(json) {
           self.delegate?.didReceiveApiData(result)
         }
       })
@@ -50,7 +52,7 @@ protocol ViewModule {
 
 
 protocol ApiDataFormatter {
-  func formatData(data: AnyObject) -> ViewModule?
+  func formatData(data: JSON) -> ViewModule?
 }
 
 

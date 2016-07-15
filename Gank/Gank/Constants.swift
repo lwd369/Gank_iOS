@@ -6,7 +6,7 @@
 //  Copyright © 2016年 李炜侃. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Network {
   
@@ -15,6 +15,9 @@ struct Network {
   
 }
 
+struct Screen {
+  static let width = UIScreen.mainScreen().bounds.width
+}
 
 enum GanhuoType: String {
   case ios      = "iOS"

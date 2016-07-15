@@ -15,7 +15,7 @@ struct DailyFormatter: ApiDataFormatter {
     let category = parseCategory(data)
     let result = parseResult(data, category: category)
     
-    let dailyViewModule = DailyViewModule(category: category, result: result)
+    let dailyViewModule = DailyViewModule(category: category, result: result, welfareImage: nil)
     return dailyViewModule
   }
   

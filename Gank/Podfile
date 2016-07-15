@@ -5,6 +5,7 @@ use_frameworks!
 
 target 'Gank' do
 pod 'SwiftyJSON'
+pod 'Kingfisher', '~> 2.4'
 end
 
 target 'GankTests' do

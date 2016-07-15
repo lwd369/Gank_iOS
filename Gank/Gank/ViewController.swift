@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import Kingfisher
 
 class ViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
@@ -17,6 +18,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    title = "Gank.io"
     apiManager = DailyApi(day: NSDate.dailyApiDate(), delegate: self)
     apiManager.startRequest()
   }
@@ -27,15 +29,23 @@ class ViewController: UIViewController {
   }
   
   private func setHeaderView() {
-    
+    let imageUrl = viewModule?.getDailyImage()!
+    let welfareImage = UIImageView()
+    welfareImage.kf_setImageWithURL(imageUrl, placeholderImage: nil, optionsInfo: nil, progressBlock: nil) {
+      [weak self] (image, error, cacheType, imageURL) in
+      if let image = image {
+        welfareImage.frame = CGRect(x: 0, y: 0, width: Screen.width, height: image.constrainHeight)
+        self?.tableView.tableHeaderView = welfareImage
+      }
+    }
   }
-
 }
 
 extension ViewController: NetworkDelegate {
   func didReceiveApiData(data: ViewModule) {
     viewModule = data as! DailyViewModule
     tableView.reloadData()
+    setHeaderView()
   }
   
   func receiveWithError() {
@@ -68,7 +78,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     var module = viewModule?.moduleAtIndexPath(indexPath)
     let safariVC = SFSafariViewController(URL: (module?.URL.toNSURL())!)
     self.navigationController?.pushViewController(safariVC, animated: true)
+    self.navigationController?.setStatusAndNavBarHidden(0)
   }
-  
+}
+
+extension ViewController: UIScrollViewDelegate {
+  func scrollViewDidScroll(scrollView: UIScrollView) {
+    self.navigationController?.setStatusAndNavBarHidden(scrollView.ratio)
+  }
 }
 

@@ -43,8 +43,9 @@ class ViewController: UIViewController {
 
 extension ViewController: NetworkDelegate {
   func didReceiveApiData(data: ViewModule) {
-    viewModule = data as! DailyViewModule
+    viewModule = data as? DailyViewModule
     tableView.reloadData()
+    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     setHeaderView()
   }
   
@@ -75,6 +76,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    tableView.cellForRowAtIndexPath(indexPath)?.selected = false
     var module = viewModule?.moduleAtIndexPath(indexPath)
     let safariVC = SFSafariViewController(URL: (module?.URL.toNSURL())!)
     self.navigationController?.pushViewController(safariVC, animated: true)

@@ -27,7 +27,7 @@ extension NetworkApi {
   
   // TODO: 处理请求失败的情况
   func startRequest() {
-    
+    UIApplication.sharedApplication().networkActivityIndicatorVisible = true
     let task = session.dataTaskWithRequest(requset) {
       data, response, error in
       guard let data = data else { return }

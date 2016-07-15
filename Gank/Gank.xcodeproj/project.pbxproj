@@ -22,6 +22,8 @@
 		AC2037091D3788F1008BEDA1 /* GanhuoModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2037081D3788F1008BEDA1 /* GanhuoModule.swift */; };
 		AC20370C1D378A53008BEDA1 /* DailyViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC20370B1D378A53008BEDA1 /* DailyViewModule.swift */; };
 		AC20370E1D37A174008BEDA1 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC20370D1D37A174008BEDA1 /* WebViewController.swift */; };
+		AC2037101D38CB44008BEDA1 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC20370F1D38CB44008BEDA1 /* NSDate+Extension.swift */; };
+		AC2037121D38CC46008BEDA1 /* ExtensionTeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2037111D38CC46008BEDA1 /* ExtensionTeset.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		AC2037081D3788F1008BEDA1 /* GanhuoModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GanhuoModule.swift; sourceTree = "<group>"; };
 		AC20370B1D378A53008BEDA1 /* DailyViewModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyViewModule.swift; sourceTree = "<group>"; };
 		AC20370D1D37A174008BEDA1 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		AC20370F1D38CB44008BEDA1 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
+		AC2037111D38CC46008BEDA1 /* ExtensionTeset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTeset.swift; sourceTree = "<group>"; };
 		BE85FC16B2BC833DDDC2FE4B /* Pods-Gank.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gank.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gank/Pods-Gank.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				AC2036EA1D378277008BEDA1 /* GankTests.swift */,
+				AC2037111D38CC46008BEDA1 /* ExtensionTeset.swift */,
 				AC2036EC1D378277008BEDA1 /* Info.plist */,
 			);
 			path = GankTests;
@@ -170,6 +175,7 @@
 			children = (
 				AC2036FB1D3782F6008BEDA1 /* Constants.swift */,
 				AC2037061D37886B008BEDA1 /* String+Extension.swift */,
+				AC20370F1D38CB44008BEDA1 /* NSDate+Extension.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -383,6 +389,7 @@
 				AC20370E1D37A174008BEDA1 /* WebViewController.swift in Sources */,
 				AC2036D61D378277008BEDA1 /* AppDelegate.swift in Sources */,
 				AC2036FF1D378311008BEDA1 /* DailyApi.swift in Sources */,
+				AC2037101D38CB44008BEDA1 /* NSDate+Extension.swift in Sources */,
 				AC2037041D378330008BEDA1 /* NetworkApi.swift in Sources */,
 				AC2037091D3788F1008BEDA1 /* GanhuoModule.swift in Sources */,
 				AC2037021D378326008BEDA1 /* DailyFormatter.swift in Sources */,
@@ -395,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC2036EB1D378277008BEDA1 /* GankTests.swift in Sources */,
+				AC2037121D38CC46008BEDA1 /* ExtensionTeset.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

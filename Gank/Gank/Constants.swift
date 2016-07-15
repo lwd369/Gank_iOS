@@ -16,3 +16,12 @@ struct Network {
 }
 
 
+enum GanhuoType: String {
+  case ios      = "iOS"
+  case android  = "Android"
+  case app      = "App"
+  case other    = "瞎推荐"
+  case welfare  = "福利"
+  case video    = "休息视频"
+  case expend   = "拓展资源"
+}

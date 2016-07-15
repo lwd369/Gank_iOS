@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class ViewController: UIViewController, NetworkDelegate {
+class ViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   var apiManager: DailyApi!
   var viewModule: DailyViewModule?
@@ -16,7 +17,7 @@ class ViewController: UIViewController, NetworkDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    apiManager = DailyApi(day: "2016/07/14", delegate: self)
+    apiManager = DailyApi(day: NSDate.dailyApiDate(), delegate: self)
     apiManager.startRequest()
   }
 
@@ -24,7 +25,14 @@ class ViewController: UIViewController, NetworkDelegate {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  
+  private func setHeaderView() {
+    
+  }
 
+}
+
+extension ViewController: NetworkDelegate {
   func didReceiveApiData(data: ViewModule) {
     viewModule = data as! DailyViewModule
     tableView.reloadData()
@@ -33,7 +41,6 @@ class ViewController: UIViewController, NetworkDelegate {
   func receiveWithError() {
     print("解析失败")
   }
-
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -59,9 +66,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     var module = viewModule?.moduleAtIndexPath(indexPath)
-    let vc = WebViewController(url: (module?.URL)!)
-    self.navigationController?.pushViewController(vc, animated: true)
-    
+    let safariVC = SFSafariViewController(URL: (module?.URL.toNSURL())!)
+    self.navigationController?.pushViewController(safariVC, animated: true)
   }
   
 }

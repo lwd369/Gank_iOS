@@ -13,14 +13,19 @@ import Kingfisher
 class ViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   var apiManager: DailyApi!
-  var viewModule: DailyViewModule?
+  var dateManager: PublishDateApi!
+  var dailyViewModule: DailyViewModule?
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
     title = "Gank.io"
-    apiManager = DailyApi(day: NSDate.dailyApiDate(), delegate: self)
-    apiManager.startRequest()
+    // TODO: 糟糕的实现
+    dateManager = PublishDateApi()
+    dateManager.startRequest()
+    dateManager.apiCompleted = { [weak self] dates in
+      self?.apiManager = DailyApi(day: dates[0], delegate: self)
+      self?.apiManager.startRequest()
+    }
   }
 
   override func didReceiveMemoryWarning() {
@@ -29,24 +34,34 @@ class ViewController: UIViewController {
   }
   
   private func setHeaderView() {
-    let imageUrl = viewModule?.getDailyImage()!
-    let welfareImage = UIImageView()
-    welfareImage.kf_setImageWithURL(imageUrl, placeholderImage: nil, optionsInfo: nil, progressBlock: nil) {
-      [weak self] (image, error, cacheType, imageURL) in
-      if let image = image {
-        welfareImage.frame = CGRect(x: 0, y: 0, width: Screen.width, height: image.constrainHeight)
-        self?.tableView.tableHeaderView = welfareImage
+    if let imageUrl = dailyViewModule?.getDailyImage() {
+      let welfareImage = UIImageView()
+      welfareImage.kf_setImageWithURL(imageUrl, placeholderImage: nil, optionsInfo: nil, progressBlock: nil) {
+        [weak self] (image, error, cacheType, imageURL) in
+        if let image = image {
+          welfareImage.frame = CGRect(x: 0, y: 0, width: Screen.width, height: image.constrainHeight)
+          self?.tableView.tableHeaderView = welfareImage
+        }
       }
     }
+  }
+  
+  @IBAction func editSectionOrder(sender: UIBarButtonItem) {
+    let sectionOrderVc = SectionOrderViewController(category: dailyViewModule!.category, completion: { [weak self] in
+      self?.dailyViewModule?.category = $0
+      self?.tableView.reloadData()
+    })
+    let navVc = UINavigationController(rootViewController: sectionOrderVc)
+    self.navigationController?.presentViewController(navVc, animated: true, completion: nil)
   }
 }
 
 extension ViewController: NetworkDelegate {
-  func didReceiveApiData(data: ViewModule) {
-    viewModule = data as? DailyViewModule
-    tableView.reloadData()
+  func didReceiveApiViewModule(viewModule: ViewModule) {
+    dailyViewModule = viewModule as? DailyViewModule
     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     setHeaderView()
+    self.tableView.reloadData()
   }
   
   func receiveWithError() {
@@ -56,37 +71,33 @@ extension ViewController: NetworkDelegate {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    let result = viewModule?.numberOfSection() ?? 0
+    let result = dailyViewModule?.numberOfSection() ?? 0
     return result
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let result = viewModule?.numberOfRowsInSection(section) ?? 0
+    let result = dailyViewModule?.numberOfRowsInSection(section) ?? 0
     return result
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("cell")
-    cell?.textLabel?.text = viewModule?.titleForIndexPath(indexPath)
+    cell?.textLabel?.text = dailyViewModule?.titleForIndexPath(indexPath)
     return cell!
   }
   
   func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return viewModule?.titleForSection(section)
+    return dailyViewModule?.titleForSection(section)
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     tableView.cellForRowAtIndexPath(indexPath)?.selected = false
-    var module = viewModule?.moduleAtIndexPath(indexPath)
+    var module = dailyViewModule?.moduleAtIndexPath(indexPath)
     let safariVC = SFSafariViewController(URL: (module?.URL.toNSURL())!)
-    self.navigationController?.pushViewController(safariVC, animated: true)
-    self.navigationController?.setStatusAndNavBarHidden(0)
+    self.presentViewController(safariVC, animated: true, completion: nil)
   }
 }
 
 extension ViewController: UIScrollViewDelegate {
-  func scrollViewDidScroll(scrollView: UIScrollView) {
-    self.navigationController?.setStatusAndNavBarHidden(scrollView.ratio)
-  }
-}
 
+}

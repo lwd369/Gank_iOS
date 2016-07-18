@@ -53,7 +53,13 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Z6c-sg-pEI" secondAttribute="bottom" id="xaz-7y-uBW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="lf2-nD-A9f"/>
+                    <navigationItem key="navigationItem" id="lf2-nD-A9f">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Wl1-43-x4Z">
+                            <connections>
+                                <action selector="editSectionOrder:" destination="BYZ-38-t0r" id="gfq-fF-bS3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Z6c-sg-pEI" id="Pbx-Zr-CJA"/>
                     </connections>

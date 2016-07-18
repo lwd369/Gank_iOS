@@ -11,7 +11,7 @@ import SwiftyJSON
 
 protocol NetworkApi {
   var requset: NSURLRequest { get set }
-  var formatter: ApiDataFormatter { get set }
+  var formatter: ApiDataFormatter? { get set } // 在处理给view提供数据的接口时提供，格式化数据为viewModule
   var delegate: NetworkDelegate? { get set }
 }
 
@@ -33,8 +33,10 @@ extension NetworkApi {
       guard let data = data else { return }
       NSOperationQueue.mainQueue().addOperationWithBlock({
         let json = JSON(data: data)
-        if let result = self.formatter.formatData(json) {
-          self.delegate?.didReceiveApiData(result)
+        if let viewModule = self.formatter?.formatData(json) {
+          self.delegate?.didReceiveApiViewModule(viewModule) // 处理复杂json转化，给vc输出专用viewmodule
+        } else {
+          self.delegate?.didReceiveApiJson(json) // 处理无关view层的数据获取
         }
       })
     }
@@ -43,10 +45,15 @@ extension NetworkApi {
 }
 
 protocol NetworkDelegate {
-  func didReceiveApiData(data: ViewModule)
+  func didReceiveApiViewModule(viewModule: ViewModule) // 可选方法
+  func didReceiveApiJson(json: JSON) // 可选方法
   func receiveWithError()
 }
 
+extension NetworkDelegate {
+  func didReceiveApiViewModule(viewModule: ViewModule) {}
+  func didReceiveApiJson(json: JSON) {}
+}
 
 protocol ViewModule {
   

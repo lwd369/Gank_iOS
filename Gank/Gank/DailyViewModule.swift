@@ -12,8 +12,10 @@ struct DailyViewModule: ViewModule {
   
   var category: [String]
   var result: [String: Array<GanhuoModule>]
-  let welfare = GanhuoType.welfare
   var welfareImage: NSURL?
+  var isEmpty: Bool {
+    return category.count == 0
+  }
   
   func numberOfSection() -> Int {
     return category.count
@@ -52,7 +54,7 @@ struct DailyViewModule: ViewModule {
     if let welfareImage = welfareImage {
       return welfareImage
     } else {
-      if var welfareModule = result[welfare.rawValue]?.first {
+      if var welfareModule = result[GanhuoType.welfare.rawValue]?.first {
         welfareImage = welfareModule.URL.toNSURL()
         return welfareImage
       }

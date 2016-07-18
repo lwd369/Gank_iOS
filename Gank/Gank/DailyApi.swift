@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct DailyApi: NetworkApi {
+class DailyApi: NetworkApi {
   
   var requset: NSURLRequest
-  var formatter: ApiDataFormatter
+  var formatter: ApiDataFormatter?
   var delegate: NetworkDelegate?
   var day: String
   

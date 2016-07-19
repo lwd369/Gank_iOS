@@ -29,6 +29,7 @@
 		AC20371B1D3C800D008BEDA1 /* PublishDateApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC20371A1D3C800D008BEDA1 /* PublishDateApi.swift */; };
 		AC20371F1D3C9E69008BEDA1 /* SectionOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC20371E1D3C9E69008BEDA1 /* SectionOrderViewController.swift */; };
 		AC2037211D3CA6AA008BEDA1 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2037201D3CA6AA008BEDA1 /* Array+Extension.swift */; };
+		AC2037251D3DC475008BEDA1 /* PresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2037241D3DC475008BEDA1 /* PresentAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		AC20371A1D3C800D008BEDA1 /* PublishDateApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishDateApi.swift; sourceTree = "<group>"; };
 		AC20371E1D3C9E69008BEDA1 /* SectionOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionOrderViewController.swift; sourceTree = "<group>"; };
 		AC2037201D3CA6AA008BEDA1 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		AC2037241D3DC475008BEDA1 /* PresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentAnimator.swift; sourceTree = "<group>"; };
 		BE85FC16B2BC833DDDC2FE4B /* Pods-Gank.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gank.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gank/Pods-Gank.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,6 +196,7 @@
 			children = (
 				AC2036D91D378277008BEDA1 /* Main.storyboard */,
 				AC2036DC1D378277008BEDA1 /* Assets.xcassets */,
+				AC2037241D3DC475008BEDA1 /* PresentAnimator.swift */,
 			);
 			name = View;
 			path = ..;
@@ -420,6 +423,7 @@
 				AC2037041D378330008BEDA1 /* NetworkApi.swift in Sources */,
 				AC2037091D3788F1008BEDA1 /* GanhuoModule.swift in Sources */,
 				AC2037021D378326008BEDA1 /* DailyFormatter.swift in Sources */,
+				AC2037251D3DC475008BEDA1 /* PresentAnimator.swift in Sources */,
 				AC2036FC1D3782F6008BEDA1 /* Constants.swift in Sources */,
 				AC20371F1D3C9E69008BEDA1 /* SectionOrderViewController.swift in Sources */,
 			);

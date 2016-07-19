@@ -17,6 +17,7 @@ struct Network {
 
 struct Screen {
   static let width = UIScreen.mainScreen().bounds.width
+  static let height = UIScreen.mainScreen().bounds.height
 }
 
 enum GanhuoType: String {

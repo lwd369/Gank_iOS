@@ -19,6 +19,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Gank.io"
+    transitioningDelegate = self
     // TODO: 糟糕的实现
     dateManager = PublishDateApi()
     dateManager.startRequest()
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
   }
 }
 
+// MARK: NetworkDelegate
 extension ViewController: NetworkDelegate {
   func didReceiveApiViewModule(viewModule: ViewModule) {
     dailyViewModule = viewModule as? DailyViewModule
@@ -69,6 +71,7 @@ extension ViewController: NetworkDelegate {
   }
 }
 
+// MARK: TableViewDelegate
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     let result = dailyViewModule?.numberOfSection() ?? 0
@@ -91,13 +94,28 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.cellForRowAtIndexPath(indexPath)?.selected = false
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
     var module = dailyViewModule?.moduleAtIndexPath(indexPath)
     let safariVC = SFSafariViewController(URL: (module?.URL.toNSURL())!)
     self.presentViewController(safariVC, animated: true, completion: nil)
   }
 }
 
+// MARK: ScrollViewDelegate
 extension ViewController: UIScrollViewDelegate {
+  func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    if scrollView.contentOffset.y / scrollView.contentSize.height > 0.6 {
+      if let vc = storyboard?.instantiateViewControllerWithIdentifier("ViewController") {
+        self.presentViewController(vc, animated: true, completion: nil)
+      }
+    }
+  }
+}
 
+// MARK: ViewControllerTransitioningDelegate
+extension ViewController: UIViewControllerTransitioningDelegate {
+  func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    return PresentAnimator()
+  }
+  
 }

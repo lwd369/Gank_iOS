@@ -14,5 +14,20 @@ extension UIScrollView {
     let currentHeight = abs(self.contentOffset.y)
     return currentHeight / contentHeight
   }
+
+  var contentHeight: CGFloat {
+    return self.contentSize.height
+  }
   
+  var offsetY: CGFloat {
+    return self.contentOffset.y
+  }
+  
+  var isPullUpToNextPage: Bool {
+    return (offsetY + Screen.height) / contentHeight > 1.1
+  }
+  
+  var isPullDownToPreviousPage: Bool {
+    return offsetY / contentHeight < -0.05
+  }
 }

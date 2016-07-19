@@ -15,23 +15,39 @@ class ViewController: UIViewController {
   var apiManager: DailyApi!
   var dateManager: PublishDateApi!
   var dailyViewModule: DailyViewModule?
-
+  var publishedDates: [String]?
+  var pageIndex = 0
+  
+  let transition = NavigationAnimator()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Gank.io"
-    transitioningDelegate = self
-    // TODO: 糟糕的实现
-    dateManager = PublishDateApi()
-    dateManager.startRequest()
-    dateManager.apiCompleted = { [weak self] dates in
-      self?.apiManager = DailyApi(day: dates[0], delegate: self)
-      self?.apiManager.startRequest()
+    navigationItem.hidesBackButton = true
+    navigationController?.delegate = self
+    if let publishedDates = publishedDates {
+      apiManager = DailyApi(day: publishedDates[pageIndex], delegate: self)
+      apiManager.startRequest()
+    } else {
+      // TODO: 糟糕的实现
+      dateManager = PublishDateApi()
+      dateManager.startRequest()
+      dateManager.apiCompleted = { [weak self] dates in
+        self?.publishedDates = dates
+        self?.apiManager = DailyApi(day: dates[0], delegate: self)
+        self?.apiManager.startRequest()
+      }
     }
+    
   }
-
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  deinit {
+    print("deinit..")
   }
   
   private func setHeaderView() {
@@ -51,9 +67,18 @@ class ViewController: UIViewController {
     let sectionOrderVc = SectionOrderViewController(category: dailyViewModule!.category, completion: { [weak self] in
       self?.dailyViewModule?.category = $0
       self?.tableView.reloadData()
-    })
+      })
     let navVc = UINavigationController(rootViewController: sectionOrderVc)
     self.navigationController?.presentViewController(navVc, animated: true, completion: nil)
+  }
+  
+  private func initViewController(nextPage: Bool) -> ViewController?{
+    if let vc = storyboard?.instantiateViewControllerWithIdentifier("ViewController") as? ViewController{
+      vc.publishedDates = publishedDates
+      vc.pageIndex = nextPage ? pageIndex+1 : pageIndex-1
+      return vc
+    }
+    return nil
   }
 }
 
@@ -65,7 +90,7 @@ extension ViewController: NetworkDelegate {
     setHeaderView()
     self.tableView.reloadData()
   }
-  
+  // TODO: 未完成请求失败响应
   func receiveWithError() {
     print("解析失败")
   }
@@ -103,19 +128,35 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: ScrollViewDelegate
 extension ViewController: UIScrollViewDelegate {
+  
   func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-    if scrollView.contentOffset.y / scrollView.contentSize.height > 0.6 {
-      if let vc = storyboard?.instantiateViewControllerWithIdentifier("ViewController") {
-        self.presentViewController(vc, animated: true, completion: nil)
+    if scrollView.isPullUpToNextPage {
+      if let vc = initViewController(true){
+        transition.isScrollUp = true
+        navigationController?.pushViewController(vc, animated: true)
+        removeFromParentViewController()
+      }
+    }
+    
+    if scrollView.isPullDownToPreviousPage {
+      if pageIndex == 0 { return }
+      if let vc = initViewController(false){
+        transition.isScrollUp = false
+        navigationController?.pushViewController(vc, animated: true)
+        removeFromParentViewController()
       }
     }
   }
 }
 
-// MARK: ViewControllerTransitioningDelegate
-extension ViewController: UIViewControllerTransitioningDelegate {
-  func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    return PresentAnimator()
+// MARK: UINavigationControllerDelegate
+extension ViewController: UINavigationControllerDelegate {
+  func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    switch operation {
+    case .Push:
+      return transition
+    default:
+      return nil
+    }
   }
-  
 }

@@ -24,10 +24,10 @@ extension UIScrollView {
   }
   
   var isPullUpToNextPage: Bool {
-    return (offsetY + Screen.height) / contentHeight > 1.1
+    return (offsetY + Screen.contentHeight) - contentHeight > 100
   }
   
   var isPullDownToPreviousPage: Bool {
-    return offsetY / contentHeight < -0.05
+    return offsetY  < -100
   }
 }

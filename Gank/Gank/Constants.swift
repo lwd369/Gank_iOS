@@ -18,6 +18,9 @@ struct Network {
 struct Screen {
   static let width = UIScreen.mainScreen().bounds.width
   static let height = UIScreen.mainScreen().bounds.height
+  static let navBarHeight = CGFloat(64.0)
+  static let tabBarHeight = CGFloat(49.0)
+  static let contentHeight = Screen.height - Screen.navBarHeight - Screen.tabBarHeight
 }
 
 enum GanhuoType: String {

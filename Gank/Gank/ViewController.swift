@@ -89,10 +89,12 @@ extension ViewController: NetworkDelegate {
     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     setHeaderView()
     self.tableView.reloadData()
+    apiManager = nil
   }
   // TODO: 未完成请求失败响应
   func receiveWithError() {
     print("解析失败")
+    apiManager = nil
   }
 }
 
@@ -135,6 +137,8 @@ extension ViewController: UIScrollViewDelegate {
         transition.isScrollUp = true
         navigationController?.pushViewController(vc, animated: true)
         removeFromParentViewController()
+        let cache = KingfisherManager.sharedManager.cache
+        cache.clearMemoryCache()
       }
     }
     
@@ -144,6 +148,8 @@ extension ViewController: UIScrollViewDelegate {
         transition.isScrollUp = false
         navigationController?.pushViewController(vc, animated: true)
         removeFromParentViewController()
+        let cache = KingfisherManager.sharedManager.cache
+        cache.clearMemoryCache()
       }
     }
   }

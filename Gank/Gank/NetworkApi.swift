@@ -22,7 +22,7 @@ extension NetworkApi {
   }
   
   var session: NSURLSession {
-    return NSURLSession(configuration: config)
+    return NSURLSession.sharedSession()
   }
   
   // TODO: 处理请求失败的情况

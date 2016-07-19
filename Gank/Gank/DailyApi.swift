@@ -12,7 +12,7 @@ class DailyApi: NetworkApi {
   
   var requset: NSURLRequest
   var formatter: ApiDataFormatter?
-  var delegate: NetworkDelegate?
+  weak var delegate: NetworkDelegate?
   var day: String
   
   init(day: String, delegate: NetworkDelegate?) {

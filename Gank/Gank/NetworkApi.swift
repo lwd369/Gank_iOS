@@ -44,7 +44,7 @@ extension NetworkApi {
   }
 }
 
-protocol NetworkDelegate {
+protocol NetworkDelegate: class {
   func didReceiveApiViewModule(viewModule: ViewModule) // 可选方法
   func didReceiveApiJson(json: JSON) // 可选方法
   func receiveWithError()

@@ -47,7 +47,7 @@ class ViewController: UIViewController {
   }
   
   deinit {
-    print("deinit..")
+    print("首页成功释放")
   }
   
   private func setHeaderView() {
@@ -89,12 +89,10 @@ extension ViewController: NetworkDelegate {
     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     setHeaderView()
     self.tableView.reloadData()
-    apiManager = nil
   }
   // TODO: 未完成请求失败响应
   func receiveWithError() {
     print("解析失败")
-    apiManager = nil
   }
 }
 

@@ -12,7 +12,7 @@ import SwiftyJSON
 class PublishDateApi: NetworkApi {
   var requset: NSURLRequest
   var formatter: ApiDataFormatter?
-  var delegate: NetworkDelegate?
+  weak var delegate: NetworkDelegate?
   private var dates = [String]()
   var apiCompleted: (([String]) -> Void)?
   

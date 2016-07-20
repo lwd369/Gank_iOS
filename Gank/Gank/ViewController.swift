@@ -23,8 +23,11 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Gank.io"
+    tableView.contentInset.top = Screen.navBarHeight
     navigationItem.hidesBackButton = true
     navigationController?.delegate = self
+    
+    
     if let publishedDates = publishedDates {
       apiManager = DailyApi(day: publishedDates[pageIndex], delegate: self)
       apiManager.startRequest()
@@ -44,6 +47,10 @@ class ViewController: UIViewController {
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  override func shouldAutorotate() -> Bool {
+    return false
   }
   
   deinit {
@@ -122,6 +129,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
     var module = dailyViewModule?.moduleAtIndexPath(indexPath)
     let safariVC = SFSafariViewController(URL: (module?.URL.toNSURL())!)
+    
     self.presentViewController(safariVC, animated: true, completion: nil)
   }
 }

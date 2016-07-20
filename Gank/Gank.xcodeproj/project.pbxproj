@@ -30,6 +30,7 @@
 		AC20371F1D3C9E69008BEDA1 /* SectionOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC20371E1D3C9E69008BEDA1 /* SectionOrderViewController.swift */; };
 		AC2037211D3CA6AA008BEDA1 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2037201D3CA6AA008BEDA1 /* Array+Extension.swift */; };
 		AC2037291D3E0425008BEDA1 /* NavigationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2037281D3E0425008BEDA1 /* NavigationAnimator.swift */; };
+		AC20372B1D3F2B03008BEDA1 /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC20372A1D3F2B03008BEDA1 /* UITabBarController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		AC20371E1D3C9E69008BEDA1 /* SectionOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionOrderViewController.swift; sourceTree = "<group>"; };
 		AC2037201D3CA6AA008BEDA1 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		AC2037281D3E0425008BEDA1 /* NavigationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationAnimator.swift; sourceTree = "<group>"; };
+		AC20372A1D3F2B03008BEDA1 /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
 		BE85FC16B2BC833DDDC2FE4B /* Pods-Gank.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gank.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gank/Pods-Gank.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -244,6 +246,7 @@
 				AC2037161D38E88F008BEDA1 /* UINavigation+Extension.swift */,
 				AC2037181D38E91E008BEDA1 /* UIScrollView+Extension.swift */,
 				AC2037201D3CA6AA008BEDA1 /* Array+Extension.swift */,
+				AC20372A1D3F2B03008BEDA1 /* UITabBarController+Extension.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				AC2037021D378326008BEDA1 /* DailyFormatter.swift in Sources */,
 				AC2036FC1D3782F6008BEDA1 /* Constants.swift in Sources */,
 				AC20371F1D3C9E69008BEDA1 /* SectionOrderViewController.swift in Sources */,
+				AC20372B1D3F2B03008BEDA1 /* UITabBarController+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

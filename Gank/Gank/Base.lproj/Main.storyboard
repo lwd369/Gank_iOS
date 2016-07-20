@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z6c-sg-pEI">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="7Ho-XS-h8e" style="IBUITableViewCellStyleDefault" id="uTn-3s-0b0">
@@ -49,9 +49,15 @@
                         <constraints>
                             <constraint firstItem="Z6c-sg-pEI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="55s-wl-uHI"/>
                             <constraint firstItem="Z6c-sg-pEI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6OB-9B-aBQ"/>
+                            <constraint firstItem="Z6c-sg-pEI" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="7Zl-LL-2fZ"/>
                             <constraint firstAttribute="trailing" secondItem="Z6c-sg-pEI" secondAttribute="trailing" id="7u5-Na-bJC"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Z6c-sg-pEI" secondAttribute="bottom" id="xaz-7y-uBW"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="55s-wl-uHI"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="C0z-aV-Amt"/>
                     <navigationItem key="navigationItem" id="lf2-nD-A9f">
@@ -89,7 +95,7 @@
         <!--Item-->
         <scene sceneID="msq-t6-8FC">
             <objects>
-                <navigationController storyboardIdentifier="nav" automaticallyAdjustsScrollViewInsets="NO" id="kDC-Vx-5Vm" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kDC-Vx-5Vm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="cbB-h0-x3L"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cg0-r1-MsI">

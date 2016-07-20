@@ -18,4 +18,13 @@ extension UINavigationController {
       UIApplication.sharedApplication().statusBarHidden = true
     }
   }
+  
+  public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    return visibleViewController!.supportedInterfaceOrientations()
+  }
+  
+  public override func shouldAutorotate() -> Bool {
+    return visibleViewController!.shouldAutorotate()
+  }
+  
 }

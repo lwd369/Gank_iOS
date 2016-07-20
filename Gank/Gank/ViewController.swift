@@ -11,6 +11,7 @@ import SafariServices
 import Kingfisher
 
 class ViewController: UIViewController {
+// MARK: Outlet and properties
   @IBOutlet weak var tableView: UITableView!
   var apiManager: DailyApi!
   var dateManager: PublishDateApi!
@@ -19,7 +20,8 @@ class ViewController: UIViewController {
   var pageIndex = 0
   
   let transition = NavigationAnimator()
-  
+
+// MARK: Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Gank.io"
@@ -27,12 +29,11 @@ class ViewController: UIViewController {
     navigationItem.hidesBackButton = true
     navigationController?.delegate = self
     
-    
+    // TODO: 糟糕的实现
     if let publishedDates = publishedDates {
       apiManager = DailyApi(day: publishedDates[pageIndex], delegate: self)
       apiManager.startRequest()
     } else {
-      // TODO: 糟糕的实现
       dateManager = PublishDateApi()
       dateManager.startRequest()
       dateManager.apiCompleted = { [weak self] dates in
@@ -41,7 +42,6 @@ class ViewController: UIViewController {
         self?.apiManager.startRequest()
       }
     }
-    
   }
   
   override func didReceiveMemoryWarning() {
@@ -56,7 +56,8 @@ class ViewController: UIViewController {
   deinit {
     print("首页成功释放")
   }
-  
+
+// MARK: Helper method
   private func setHeaderView() {
     if let imageUrl = dailyViewModule?.getDailyImage() {
       let welfareImage = UIImageView()
@@ -79,13 +80,23 @@ class ViewController: UIViewController {
     self.navigationController?.presentViewController(navVc, animated: true, completion: nil)
   }
   
-  private func initViewController(nextPage: Bool) -> ViewController?{
+  private func initViewController(isNext nextPage: Bool) -> ViewController?{
     if let vc = storyboard?.instantiateViewControllerWithIdentifier("ViewController") as? ViewController{
       vc.publishedDates = publishedDates
       vc.pageIndex = nextPage ? pageIndex+1 : pageIndex-1
       return vc
     }
     return nil
+  }
+  
+  private func pushToViewController(isNext isNext: Bool) {
+    if let vc = initViewController(isNext: isNext) {
+      transition.isScrollUp = isNext
+      navigationController?.pushViewController(vc, animated: true)
+      removeFromParentViewController()
+      let cache = KingfisherManager.sharedManager.cache
+      cache.clearMemoryCache()
+    }
   }
 }
 
@@ -139,24 +150,12 @@ extension ViewController: UIScrollViewDelegate {
   
   func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
     if scrollView.isPullUpToNextPage {
-      if let vc = initViewController(true){
-        transition.isScrollUp = true
-        navigationController?.pushViewController(vc, animated: true)
-        removeFromParentViewController()
-        let cache = KingfisherManager.sharedManager.cache
-        cache.clearMemoryCache()
-      }
+      pushToViewController(isNext: true)
     }
     
     if scrollView.isPullDownToPreviousPage {
       if pageIndex == 0 { return }
-      if let vc = initViewController(false){
-        transition.isScrollUp = false
-        navigationController?.pushViewController(vc, animated: true)
-        removeFromParentViewController()
-        let cache = KingfisherManager.sharedManager.cache
-        cache.clearMemoryCache()
-      }
+        pushToViewController(isNext: false)
     }
   }
 }

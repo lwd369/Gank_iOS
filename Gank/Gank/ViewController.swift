@@ -69,6 +69,11 @@ class ViewController: UIViewController {
         }
       }
     }
+    
+    let pageHeaderView = PageHeaderView()
+    pageHeaderView.frame = CGRectMake(0, -Screen.navBarHeight, Screen.width, Screen.navBarHeight)
+    pageHeaderView.title = "测试一下啦"
+    tableView.addSubview(pageHeaderView)
   }
   
   @IBAction func editSectionOrder(sender: UIBarButtonItem) {
@@ -147,7 +152,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: ScrollViewDelegate
 extension ViewController: UIScrollViewDelegate {
-  
   func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
     if scrollView.isPullUpToNextPage {
       pushToViewController(isNext: true)

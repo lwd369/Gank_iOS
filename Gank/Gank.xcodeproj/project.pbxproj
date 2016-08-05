@@ -31,6 +31,7 @@
 		AC2037211D3CA6AA008BEDA1 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2037201D3CA6AA008BEDA1 /* Array+Extension.swift */; };
 		AC2037291D3E0425008BEDA1 /* NavigationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2037281D3E0425008BEDA1 /* NavigationAnimator.swift */; };
 		AC20372B1D3F2B03008BEDA1 /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC20372A1D3F2B03008BEDA1 /* UITabBarController+Extension.swift */; };
+		AC2037311D3F6EDE008BEDA1 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2037301D3F6EDE008BEDA1 /* PageHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		AC2037201D3CA6AA008BEDA1 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		AC2037281D3E0425008BEDA1 /* NavigationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationAnimator.swift; sourceTree = "<group>"; };
 		AC20372A1D3F2B03008BEDA1 /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
+		AC2037301D3F6EDE008BEDA1 /* PageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageHeaderView.swift; sourceTree = "<group>"; };
 		BE85FC16B2BC833DDDC2FE4B /* Pods-Gank.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gank.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gank/Pods-Gank.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -199,6 +201,7 @@
 				AC2036D91D378277008BEDA1 /* Main.storyboard */,
 				AC2036DC1D378277008BEDA1 /* Assets.xcassets */,
 				AC2037281D3E0425008BEDA1 /* NavigationAnimator.swift */,
+				AC2037301D3F6EDE008BEDA1 /* PageHeaderView.swift */,
 			);
 			name = View;
 			path = ..;
@@ -421,6 +424,7 @@
 				AC2037171D38E88F008BEDA1 /* UINavigation+Extension.swift in Sources */,
 				AC2037211D3CA6AA008BEDA1 /* Array+Extension.swift in Sources */,
 				AC2037291D3E0425008BEDA1 /* NavigationAnimator.swift in Sources */,
+				AC2037311D3F6EDE008BEDA1 /* PageHeaderView.swift in Sources */,
 				AC2036FF1D378311008BEDA1 /* DailyApi.swift in Sources */,
 				AC2037101D38CB44008BEDA1 /* NSDate+Extension.swift in Sources */,
 				AC2037191D38E91E008BEDA1 /* UIScrollView+Extension.swift in Sources */,
